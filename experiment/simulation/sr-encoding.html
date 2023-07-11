@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/css/style.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/sr-encoding.css">
+
+    <title>
+       Meggitt Decoder
+    </title>
+</head>
+
+<body onload=generateMessage()>
+
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-one-quarter v-instruction-title">
+                Tasks
+            </div>
+            <div class="column">
+                <div class="v-tabs">
+                    <ul>
+                        <li id="Task1" onclick="window.location.href = 'index.html';">
+                            <a>
+                                Encoding
+                            </a>
+                        </li>
+
+                        <li class="is-active" id="Task2">
+                            <a>
+                                Shift Register Encoding
+                            </a>
+                        </li>
+
+                        <li id="Task3" onclick="window.location.href = 'decoding.html';">
+                            <a>
+                                Meggitt Decoder
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column">
+                <div class="v-collapsible-instruction-container v-instruction-container">
+                    <div class="v-collapsible is-size-5">Instructions </div>
+                    <div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
+                        <ul style="list-style: disc;">
+
+                            <b>Quick theory overview:</b>
+                            <li>
+                                Encoding
+                            </li>
+                        </ul>
+
+                        <br>
+
+                        <ul style="list-style: disc;">
+
+                            <b>Procedure:</b>
+
+                            <li>
+                                First enter a binary message and click on <b>Submit</b>.
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="columns is-centered">
+        <div class="column is-11-desktop is-12-tablet is-12-mobile">
+            <div class="v-datalist-container components-list">
+                <p> Encode the message <span id="message-bits" style="color: blue;"></span> using the (7, 4) cyclic code
+                    with generator matrix <b>g(x)=1+x+x<sup>3</sup></b>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns is-centered is-flex-direction-row is-flex-wrap-wrap is-align-content-start"
+        style="margin-top:-1.5%">
+        <div class="column is-8-desktop is-12-tablet is-12-mobile">
+            <div class="box-question">
+                <div class="image-container">
+                    <img id="image" src="./images/cyclic-encoding.png">
+                    <div class="shift-container-1">
+                        <span id="shift-reg-1">0</span>
+                    </div>
+                    <div class="shift-container-2">
+                        <span id="shift-reg-2">0</span>
+                    </div>
+                    <div class="shift-container-3">
+                        <span id="shift-reg-3">0</span>
+                    </div>
+
+                    <div class="message-container">
+                        <span id="inp-message-bit"> </span>
+                    </div>
+
+                    <form action="" method="get" id="form1" onsubmit="return false">
+
+                        <div class="input-container-1">
+                            <label for="p1"> </label>
+                            <input type="number" class="fixed-bit" id="p1" min="0" max="1">
+                        </div>
+
+                        <div class="input-container-2">
+                            <label for="p2"> </label>
+                            <input type="number" class="fixed-bit" id="p2" min="0" max="1">
+                        </div>
+
+                        <div class="input-container-3">
+                            <label for="p3"> </label>
+                            <input type="number" class="fixed-bit" id="p3" min="0" max="1">
+                        </div>
+
+                    </form>
+
+                </div>
+                <div id="submit1">
+                    <button class="v-button" onclick="checkAnswer()" form="form1">Submit</button>
+                </div>
+
+                <div id="codeword" style="display:none">
+                    <form action="" method="get" id="form2" onsubmit="return  false">
+                        Codeword
+                        <label for="c1"> </label>
+                        <input type="number" class="bit" id="c1" min="0" max="1">
+                        <label for="c2"> </label>
+                        <input type="number" class="bit" id="c2" min="0" max="1">
+                        <label for="c3"> </label>
+                        <input type="number" class="bit" id="c3" min="0" max="1">
+                        <label for="c4"> </label>
+                        <input type="number" class="bit" id="c4" min="0" max="1">
+                        <label for="c5"> </label>
+                        <input type="number" class="bit" id="c5" min="0" max="1">
+                        <label for="c6"> </label>
+                        <input type="number" class="bit" id="c6" min="0" max="1">
+                        <label for="c7"> </label>
+                        <input type="number" class="bit" id="c7" min="0" max="1">
+
+
+                    </form>
+                    <br>
+                    <button class="v-button" onclick="verifyCodeword()" form="form2">Submit</button>
+                    <button class="v-button" onclick="initial()" form="form2">Next</button>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="column is-3-desktop is-4-tablet is-12-mobile">
+            <div class="v-datalist-container components-list">
+                <div class="v-datalist-title">Observations</div>
+                <div id="observations">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
+    <script src="./js/sr-encoding.js"></script>
+</body>
+
+</html>

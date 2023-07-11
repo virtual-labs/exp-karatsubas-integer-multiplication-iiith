@@ -2,37 +2,37 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "Which of the following is not an atomic proposition?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "The sun is hot",
+        "b": "I take a taxi if I have enough money",
+        "c": "It was almost noon",
+        "d": "There was no water in the jug on the table in the kitchen"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "This is an atomic proposition; it cannot be broken into simpler propositions.",
+        "b": "This sentence combines 2 atomic propositions: 'I take a taxi' and 'I have enough money'. ",
+        "c": "This is an atomic proposition; it cannot be broken into simpler propositions.",
+        "d": "This is an atomic proposition; it cannot be broken into simpler propositions."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
-    {
-      "question": "This is a Sample Question 2?",
+    { 
+      "question": "If the weather is warm and the sky is clear, then we go boating. Pick the valid conclusion. [Hint: try to think of each proposition as a symbol]",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "We did not go boating, so the weather must not have been warm",
+        "b": "The sky was cloudy and the weather was warm, so we did not go boating.",
+        "c": "We went boating, so the weather must have been warm and the sky clear",
+        "d": "The sky was clear and the weather was warm. We did not go boating"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "It is possible that the weather was warm but the sky was cloudy",
+        "b": "You can go boating when the sky is clear and weather is warm, but that does not mean you cannot go boating when they are not.",
+        "c": "You can go boating when the sky is clear and weather is warm, but that does not mean you cannot go boating when they are not.",
+        "d": "If both requirements are fulfilled, then you must go out."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "d",
       "difficulty": "beginner"
     }
   ]

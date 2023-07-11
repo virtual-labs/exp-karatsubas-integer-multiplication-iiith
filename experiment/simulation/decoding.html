@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/css/style.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/decoding.css">
+
+    <title>
+        Shift Register Encoding - Cyclic Codes
+    </title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-one-quarter v-instruction-title">
+                Tasks
+            </div>
+            <div class="column">
+                <div class="v-tabs">
+                    <ul>
+                        <li id="Task1" onclick="window.location.href = 'index.html';">
+                            <a>
+                                Encoding
+                            </a>
+                        </li>
+
+                        <li id="Task2" onclick="window.location.href = 'sr-encoding.html';">
+                            <a>
+                                Shift Register Encoding
+                            </a>
+                        </li>
+
+                        <li class="is-active" id="Task3">
+                            <a>
+                                Meggitt Decoder
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column">
+                <div class="v-collapsible-instruction-container v-instruction-container">
+                    <div class="v-collapsible is-size-5">Instructions </div>
+                    <div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
+                        <ul style="list-style: disc;">
+
+                            <b>Quick theory overview:</b>
+                            <li>
+                                Encoding
+                            </li>
+                        </ul>
+
+                        <br>
+
+                        <ul style="list-style: disc;">
+
+                            <b>Procedure:</b>
+
+                            <li>
+                                First enter a binary message and click on <b>Submit</b>.
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="columns is-centered">
+        <div class="column is-11-desktop is-12-tablet is-12-mobile">
+            <div class="v-datalist-container components-list">
+                <p> Decode the received vector <span id="message-bits" style="color: blue;">1011011</span>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns is-centered is-flex-direction-row is-flex-wrap-wrap is-align-content-start"
+        style="margin-top:-1.5%">
+        <div class="column is-8-desktop is-12-tablet is-12-mobile">
+            <div class="box-question">
+                <div class="image-container">
+                    <img id="image" src="./images/cyclic-decoding.png">
+
+                    <!-- Syndrome Registers/Shift Registers -->
+                    <div class="shift-container-1">
+                        <span id="shift-reg-1">0</span>
+                    </div>
+                    <div class="shift-container-2">
+                        <span id="shift-reg-2">0</span>
+                    </div>
+                    <div class="shift-container-3">
+                        <span id="shift-reg-3">1</span>
+                    </div>
+
+
+                    <!-- Buffer Registers -->
+                    <div class="buffer-container-1">
+                        <span id="buffer-bit-1">1</span>
+                    </div>
+
+                    <div class="buffer-container-2">
+                        <span id="buffer-bit-2">0</span>
+                    </div>
+
+                    <div class="buffer-container-3">
+                        <span id="buffer-bit-3">1</span>
+                    </div>
+
+                    <div class="buffer-container-4">
+                        <span id="buffer-bit-4">1</span>
+                    </div>
+
+                    <div class="buffer-container-5">
+                        <span id="buffer-bit-5">0</span>
+                    </div>
+
+                    <div class="buffer-container-6">
+                        <span id="buffer-bit-6">1</span>
+                    </div>
+
+                    <div class="buffer-container-7">
+                        <span id="buffer-bit-7">1</span>
+                    </div>
+
+                    <form action="" method="get" id="form1" onsubmit="return false">
+                        <!-- Input Fields -->
+                        <div class="input-container-1">
+                            <label for="p1"> </label>
+                            <input type="number" class="fixed-bit" id="p1" min="0" max="1">
+                        </div>
+
+                        <div class="input-container-2">
+                            <label for="p2"> </label>
+                            <input type="number" class="fixed-bit" id="p2" min="0" max="1">
+                        </div>
+
+                        <div class="input-container-3">
+                            <label for="p3"> </label>
+                            <input type="number" class="fixed-bit" id="p3" min="0" max="1">
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <button class="v-button" id="submit-1" onclick="checkAnswer()" form="form1">Submit</button>
+                <button class="v-button" onclick="initial()">Reset</button>
+
+
+            </div>
+        </div>
+
+        <div class="column is-3-desktop is-4-tablet is-12-mobile">
+            <div class="v-datalist-container components-list">
+                <div class="v-datalist-title">Observations</div>
+                <div id="observations">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
+    <script src="./js/decoding.js"></script>
+</body>
+
+</html>

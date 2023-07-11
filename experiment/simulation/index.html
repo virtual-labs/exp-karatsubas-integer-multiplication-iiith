@@ -1,13 +1,164 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+<html lang="en">
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/css/style.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <title>
+        Propositional Logic - Inference
+    </title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-one-quarter v-instruction-title">
+                Tasks
+            </div>
+            <div class="column">
+                <div class="v-tabs">
+                    <ul>
+
+                        <li class="is-active" id="Task1">
+                            <a>
+                                Task 1
+                            </a>
+                        </li>
+
+                        <li id="Task2" onclick="window.location.href = 'index-2.html';">
+                            <a>
+                                Task 2
+                            </a>
+                        </li>
+
+                        <li id="Task3" onclick="window.location.href = 'index-3.html';">
+                            <a>
+                                Task 3
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="columns is-centered">
+            <div class="column">
+                <div class="v-collapsible-instruction-container v-instruction-container">
+                    <div class="v-collapsible is-size-5">Instructions </div>
+                    <div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
+                        <ul style="list-style: disc;">
+
+                            <b>Procedure:</b>
+
+                            <li>
+                                Pick the correct truth value for each cell and press Verify.
+                            </li>
+
+                            <li>
+                                The correctness of the entered answer is displayed in <b>Observations</b>.
+                            </li>
+
+                            <li>
+                                If the all answers are correct, click <b>Next</b> to try a
+                                different question.
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <div class="columns is-centered">
+        <div class="column is-11-desktop is-12-tablet is-12-mobile">
+            <div class="v-datalist-container components-list">
+                <p>
+                    Fill the correct truth values.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="columns is-centered is-flex-direction-row is-flex-wrap-wrap is-align-content-start">
+        <div  class="column is-6-desktop simulation">
+                            <div class="v-table-wrap">
+                                <table class="table is-bordered is-fullwidth v-table-primary mb-2">
+                                    <thead>
+                                        <tr>
+                                            <th>P</th>
+                                            <th>Q</th>
+                                            <th>&#172;P</th>
+                                            <th>&#172;P &#8744; Q</th>
+                                            <th>P &#8658; Q</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td >0</td>
+                                            <td >0</td>
+                                            <td ><input type="number" class="bit" id="3_1" min="0" max="1"></td>
+                                            <td ><input disabled type="number" class="bit" id="4_1" min="0" max="1"> </td>
+                                            <td ><input disabled type="number" class="bit" id="5_1" min="0" max="1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td id="1_2">0</td>
+                                            <td id="2_2">1</td>
+                                            <td><input type="number" class="bit" id="3_2" min="0" max="1"></td>
+                                            <td><input disabled type="number" class="bit" id="4_2" min="0" max="1"></td>
+                                            <td><input disabled type="number" class="bit" id="5_2" min="0" max="1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td id="1_3">1</td>
+                                            <td id="2_3">0</td>
+                                            <td><input type="number" class="bit" id="3_3" min="0" max="1"></td>
+                                            <td><input disabled type="number" class="bit" id="4_3" min="0" max="1"></td>
+                                            <td><input disabled type="number" class="bit" id="5_3" min="0" max="1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td id="1_4">1</td>
+                                            <td id="2_4">1</td>
+                                            <td><input type="number" class="bit" id="3_4" min="0" max="1"></td>
+                                            <td><input disabled type="number" class="bit" id="4_4" min="0" max="1"></td>
+                                            <td><input disabled type="number" class="bit" id="5_4" min="0" max="1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><button class="v-button" onclick="reset()">Reset</button></td>
+                                            <td><button id="3_5" class="v-button" onclick="checkColumn(3)">Verify</button></td>
+                                            <td><button id="4_5" disabled class="v-button" onclick="checkColumn(4)">Verify</button></td>
+                                            <td><button id="5_5" disabled class="v-button" onclick="checkColumn(5)">Submit</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+        <div class="is-8-desktop is-4-tablet is-12-mobile" style="margin-right: 1vh; padding: 0.1% 0%;">
+            <div class="v-datalist-container components-list">
+                <div class="v-datalist-title">Observations</div>
+                <div id="observations">
+                    <div id="correct" class="is-centered title is-hidden">Correct!</div>
+                    <div id="incorrect" class="is-centered is-hidden">Incorrect</div> 
+                    <div id="plc" class="is-centered">2 answer(s) are incorrect</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-left:90%">
+        <button id="next" class="v-button is-hidden">Next</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
+    <script src="./js/truth-table-1.js"></script>
 </body>
+
 </html>

@@ -2,20 +2,20 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "All logical sentences can be written using only:",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "∧ and ∨",
+        "b": "¬, ∧ and ∨",
+        "c": "⇒ and ¬",
+        "d": "None of the above."
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Refer theory section",
+        "b": "Refer theory section",
+        "c": "Refer theory section",
+        "d": "Refer theory section"
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {

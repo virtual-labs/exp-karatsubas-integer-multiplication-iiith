@@ -1,0 +1,204 @@
+.image-container {
+    position: relative;
+}
+
+img {
+    width: 70%;
+}
+
+.input-container-1 {
+    position: absolute;
+    top: 55%;
+    left: 35%;
+    width: 6%;
+    height: 12%;
+}
+
+.input-container-2 {
+    position: absolute;
+    top: 55%;
+    left: 50.7%;
+    width: 6%;
+    height: 12%;
+}
+
+.input-container-3 {
+    position: absolute;
+    top: 55%;
+    left: 62%;
+    width: 6%;
+    height: 12%;
+}
+
+.shift-container-1 {
+    position: absolute;
+    top: 46.5%;
+    left: 35%;
+    width: 6%;
+    height: 12%;
+}
+
+.shift-container-2 {
+    position: absolute;
+    top: 46.5%;
+    left: 50.7%;
+    width: 6%;
+    height: 12%;
+}
+
+.shift-container-3 {
+    position: absolute;
+    top: 46.5%;
+    left: 62%;
+    width: 6%;
+    height: 12%;
+}
+
+.buffer-container-1 {
+    position: absolute;
+    top: 16.5%;
+    left: 38.5%;
+    width: 6%;
+    height: 12%;
+}
+
+.buffer-container-2 {
+    position: absolute;
+    top: 16.5%;
+    left: 42.5%;
+    width: 6%;
+    height: 12%;
+}
+
+.buffer-container-3 {
+    position: absolute;
+    top: 16.5%;
+    left: 46.5%;
+    width: 6%;
+    height: 12%;
+}
+
+.buffer-container-4 {
+    position: absolute;
+    top: 16.5%;
+    left: 50.5%;
+    width: 6%;
+    height: 12%;
+}
+
+.buffer-container-5 {
+    position: absolute;
+    top: 16.5%;
+    left:54.4%;
+    width: 6%;
+    height: 12%;
+}
+
+.buffer-container-6 {
+    position: absolute;
+    top: 16.5%;
+    left: 58.3%;
+    width: 6%;
+    height: 12%;
+}
+
+.buffer-container-7 {
+    position: absolute;
+    top: 16.5%;
+    left: 62.2%;
+    width: 6%;
+    height: 12%;
+}
+
+
+@media screen and (min-width: 700px) {
+    .fixed-bit {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        border: solid black;
+        border-radius: 20%;
+        background-color: #fff;
+        font-size: 1.5rem;
+        color: blue;
+    }
+
+    #shift-reg-1,
+    #shift-reg-2,
+    #shift-reg-3 {
+        font-size: 150%;
+        font-weight: bold;
+        color: yellowgreen;
+        /* For Vertical Centering */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 12%;
+    }
+
+    #buffer-bit-1,
+    #buffer-bit-2,
+    #buffer-bit-3,
+    #buffer-bit-4,
+    #buffer-bit-5,
+    #buffer-bit-6,
+    #buffer-bit-7 {
+        font-size: 150%;
+        font-weight: bold;
+        color: darkviolet;
+        /* For Vertical Centering */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 12%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .fixed-bit {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        border: solid black;
+        border-radius: 20%;
+        background-color: #fff;
+        font-size: 0.9rem;
+        color: blue;
+    }
+
+    #shift-reg-1,
+    #shift-reg-2,
+    #shift-reg-3 {
+        font-size: 75%;
+        font-weight: bold;
+        color: yellowgreen;
+        /* For Vertical Centering */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 12%;
+    }
+
+    #buffer-bit-1,
+    #buffer-bit-2,
+    #buffer-bit-3,
+    #buffer-bit-4,
+    #buffer-bit-5,
+    #buffer-bit-6,
+    #buffer-bit-7 {
+        font-size: 75%;
+        font-weight: bold;
+        color: darkviolet;
+        /* For Vertical Centering */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 12%;
+    }
+}
