@@ -2,37 +2,88 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "Which of the following is not an atomic proposition?",
+      "question": "What is the name of the technique used in the Karatsuba algorithm to combine the results of the recursive subproblems to obtain the final multiplication result?",
       "answers": {
-        "a": "The sun is hot",
-        "b": "I take a taxi if I have enough money",
-        "c": "It was almost noon",
-        "d": "There was no water in the jug on the table in the kitchen"
+        "a": "Merge Sort",
+        "b": "Divide and Conquer",
+        "c": "Dynamic Programming",
+        "d": "Greedy"
       },
       "explanations": {
-        "a": "This is an atomic proposition; it cannot be broken into simpler propositions.",
-        "b": "This sentence combines 2 atomic propositions: 'I take a taxi' and 'I have enough money'. ",
-        "c": "This is an atomic proposition; it cannot be broken into simpler propositions.",
-        "d": "This is an atomic proposition; it cannot be broken into simpler propositions."
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
     },
     { 
-      "question": "If the weather is warm and the sky is clear, then we go boating. Pick the valid conclusion. [Hint: try to think of each proposition as a symbol]",
+      "question": "What is the time complexity of the traditional long multiplication algorithm for multiplying two n-digit numbers?",
       "answers": {
-        "a": "We did not go boating, so the weather must not have been warm",
-        "b": "The sky was cloudy and the weather was warm, so we did not go boating.",
-        "c": "We went boating, so the weather must have been warm and the sky clear",
-        "d": "The sky was clear and the weather was warm. We did not go boating"
+        "a": "O(n^2)",
+        "b": "O(n^1.5)",
+        "c": "O(nlog(n))",
+        "d": "O(n^1.59)"
       },
       "explanations": {
-        "a": "It is possible that the weather was warm but the sky was cloudy",
-        "b": "You can go boating when the sky is clear and weather is warm, but that does not mean you cannot go boating when they are not.",
-        "c": "You can go boating when the sky is clear and weather is warm, but that does not mean you cannot go boating when they are not.",
-        "d": "If both requirements are fulfilled, then you must go out."
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    { 
+      "question": "How many parts does the Karatsuba multiplication algorithm break the input into at each level of recursion?",
+      "answers": {
+        "a": "4",
+        "b": "3",
+        "c": "2",
+        "d": "10"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    { 
+      "question": "What is the time complexity of the Karatsuba algorithm?",
+      "answers": {
+        "a": "O(n^2)",
+        "b": "O(n^1.5)",
+        "c": "O(nlog(n))",
+        "d": "O(n^1.59)"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
       },
       "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    { 
+      "question": "The Karatsuba algorithm is a fast multiplication algorithm that reduces the number of recursive calls by breaking down the multiplication of large numbers into smaller multiplications. What is the key factor that determines when to stop further recursion and use traditional multiplication for smaller subproblems",
+      "answers": {
+        "a": "The size of the input numbers in digits.",
+        "b": "The number of additions required for the multiplication.",
+        "c": "The number of recursive calls made so far.",
+        "d": "The parity of the input numbers (whether they are odd or even)."
+      },
+      "explanations": {
+        "a": "When the input numbers become small enough, it becomes more efficient to use traditional multiplication for those subproblems instead of making further recursive calls",
+        "b": "hen the input numbers become small enough, it becomes more efficient to use traditional multiplication for those subproblems instead of making further recursive calls",
+        "c": "hen the input numbers become small enough, it becomes more efficient to use traditional multiplication for those subproblems instead of making further recursive calls",
+        "d": "hen the input numbers become small enough, it becomes more efficient to use traditional multiplication for those subproblems instead of making further recursive calls"
+      },
+      "correctAnswer": "a",
       "difficulty": "beginner"
     }
   ]

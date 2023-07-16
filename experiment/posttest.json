@@ -2,37 +2,88 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "All logical sentences can be written using only:",
+      "question": "In the Karatsuba algorithm, what is the main idea behind breaking down the multiplication of large numbers into smaller subproblems?",
       "answers": {
-        "a": "∧ and ∨",
-        "b": "¬, ∧ and ∨",
-        "c": "⇒ and ¬",
-        "d": "None of the above."
+        "a": "To reduce the number of digits in each number.",
+        "b": "To utilize a more efficient multiplication algorithm.",
+        "c": "To simplify the addition of the partial products.",
+        "d": "To reduce the number of recursive calls and improve efficiency."
       },
       "explanations": {
-        "a": "Refer theory section",
-        "b": "Refer theory section",
-        "c": "Refer theory section",
-        "d": "Refer theory section"
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "Which of the following multiplication scenarios would benefit the most from using the Karatsuba algorithm?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Multiplying two 2-digit numbers.",
+        "b": "Multiplying two 3-digit numbers.",
+        "c": "Multiplying two 4-digit numbers.",
+        "d": "Multiplying two 1-digit numbers."
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "The larger the number, the more it benefits",
+        "b": "The larger the number, the more it benefits",
+        "c": "The larger the number, the more it benefits",
+        "d": "The larger the number, the more it benefits"
       },
       "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    { 
+      "question": "How many levels of recursion are required to compute the product of two n-bit numbers using Karatsuba multiplication?",
+      "answers": {
+        "a": "sqrt(n)",
+        "b": "n/2",
+        "c": "log(n)/log(2)",
+        "d": "log(2)/log(n)"
+      },
+      "explanations": {
+        "a": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2).",
+        "b": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2).",
+        "c": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2).",
+        "d": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2)."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "How many of the three recursive calls are taking place at any one time?",
+      "answers": {
+        "a": "3",
+        "b": "1",
+        "c": "4",
+        "d": "2"
+      },
+      "explanations": {
+        "a": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed.",
+        "b": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed.",
+        "c": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed.",
+        "d": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What three recursive top-level multiplies are called for when one uses Karatsuba multiplication to multiply the binary numbers 10010111 and 11101001: (i) 1001·1110 (ii) 0111·1001 (iii) 10000·10111 (iv) 1011·1001 (v) 0101·1110 (vi) 10000·10001",
+      "answers": {
+        "a": "(i), (ii), (vi)",
+        "b": "(i), (ii), (iii)",
+        "c": "(ii), (iii), (iv)",
+        "d": "(i), (iii), (v)"
+      },
+      "explanations": {
+        "a": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111.",
+        "b": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111.",
+        "c": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111.",
+        "d": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111."
+      },
+      "correctAnswer": "b",
       "difficulty": "beginner"
     }
   ]
