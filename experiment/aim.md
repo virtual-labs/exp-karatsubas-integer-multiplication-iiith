@@ -1,1 +1,1 @@
-### Aim of the experiment
+The main purpose of this experiment is to introduce design of faster algorithms using recursion, specifically the fasterinteger multiplication algorithm of Karatsuba.
