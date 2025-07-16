@@ -1,8 +1,15 @@
 {
-  "unit-type": "lu",
+ "unit-type": "lu",
   "label": "",
   "basedir": ".",
   "LaTeXinMD": true,
+  "code-assessment": {
+    "include": false,
+    "languages": ["javascript"],
+    "position": 5
+  },
+  "services": [],
+  "service-worker": "/path/to/service-worker.js",
   "units": [
     {
       "unit-type": "aim"
@@ -27,13 +34,6 @@
       "label": "Procedure",
       "unit-type": "task",
       "content-type": "text"
-    },
-    {
-      "target": "demo.html",
-      "source": "simulation/demo.html",
-      "label": "Demo",
-      "unit-type": "task",
-      "content-type": "simulation"
     },
     {
       "target": "simulation.html",
