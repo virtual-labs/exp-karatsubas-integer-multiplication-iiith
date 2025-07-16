@@ -1,5 +1,5 @@
 {
- "unit-type": "lu",
+  "unit-type": "lu",
   "label": "",
   "basedir": ".",
   "LaTeXinMD": true,
@@ -40,7 +40,8 @@
       "source": "simulation/index.html",
       "label": "Simulation",
       "unit-type": "task",
-      "content-type": "simulation"
+      "content-type": "simulation",
+      "additional-sources": []
     },
     {
       "target": "posttest.html",
