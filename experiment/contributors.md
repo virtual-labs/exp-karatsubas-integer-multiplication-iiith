@@ -3,3 +3,4 @@
 | :---: | :----------------:| :----------------------------------:| :---------------:| :--: |
 | 1   | Suryajith Chillara | suryajith.chillara@iiit.ac.in     | IIIT Hyderabad  |     |
 | 2   | Girish Varma       | girish.varma@iiit.ac.in           | IIIT Hyderabad  |     |
+| 3   | George Rahul        | georgerahul24@gmail.com            |    Intern        |
