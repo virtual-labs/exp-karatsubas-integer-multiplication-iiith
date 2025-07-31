@@ -2,89 +2,157 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "In the Karatsuba algorithm, what is the main idea behind breaking down the multiplication of large numbers into smaller subproblems?",
+      "question": "What is the main advantage of Karatsuba's algorithm over traditional multiplication?",
       "answers": {
-        "a": "To reduce the number of digits in each number.",
-        "b": "To utilize a more efficient multiplication algorithm.",
-        "c": "To simplify the addition of the partial products.",
-        "d": "To reduce the number of recursive calls and improve efficiency."
+        "a": "It uses less memory",
+        "b": "It is easier to implement",
+        "c": "It has better asymptotic time complexity",
+        "d": "It works better with small numbers"
       },
       "explanations": {
-        "a": "",
-        "b": "",
-        "c": "",
-        "d": ""
-      },
-      "correctAnswer": "b",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "Which of the following multiplication scenarios would benefit the most from using the Karatsuba algorithm?",
-      "answers": {
-        "a": "Multiplying two 2-digit numbers.",
-        "b": "Multiplying two 3-digit numbers.",
-        "c": "Multiplying two 4-digit numbers.",
-        "d": "Multiplying two 1-digit numbers."
-      },
-      "explanations": {
-        "a": "The larger the number, the more it benefits",
-        "b": "The larger the number, the more it benefits",
-        "c": "The larger the number, the more it benefits",
-        "d": "The larger the number, the more it benefits"
+        "a": "Memory usage isn't the primary advantage; Karatsuba may actually use more memory due to recursion.",
+        "b": "Karatsuba is actually more complex to implement than traditional multiplication.",
+        "c": "Correct! Karatsuba reduces time complexity from O(n²) to O(n^1.585), providing significant speedup for large numbers.",
+        "d": "Karatsuba is actually less efficient than traditional methods for small numbers due to overhead."
       },
       "correctAnswer": "c",
-      "difficulty": "beginner"
+      "difficulty": "easy"
     },
-    { 
-      "question": "How many levels of recursion are required to compute the product of two n-bit numbers using Karatsuba multiplication?",
+    {
+      "question": "In Karatsuba's algorithm, when we split x = 1234 at position 2, what are the high and low parts?",
       "answers": {
-        "a": "sqrt(n)",
-        "b": "n/2",
-        "c": "log(n)/log(2)",
-        "d": "log(2)/log(n)"
+        "a": "High = 12, Low = 34",
+        "b": "High = 34, Low = 12",
+        "c": "High = 1, Low = 234",
+        "d": "High = 123, Low = 4"
       },
       "explanations": {
-        "a": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2).",
-        "b": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2).",
-        "c": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2).",
-        "d": "At each recursive call, the number of bits is halved, so the number of levels is log(n)/log(2)."
+        "a": "Correct! When splitting at position 2 from the right, we get 12 (leftmost 2 digits) as high part and 34 (rightmost 2 digits) as low part.",
+        "b": "This reverses the high and low parts incorrectly.",
+        "c": "This would be splitting at position 3, not position 2.",
+        "d": "This would be splitting at position 1, not position 2."
+      },
+      "correctAnswer": "a",
+      "difficulty": "easy"
+    },
+    {
+      "question": "How many multiplication operations does Karatsuba's algorithm require at each level of recursion?",
+      "answers": {
+        "a": "2 multiplications",
+        "b": "3 multiplications", 
+        "c": "4 multiplications",
+        "d": "5 multiplications"
+      },
+      "explanations": {
+        "a": "Two multiplications wouldn't be enough to compute all necessary terms.",
+        "b": "Correct! Karatsuba performs exactly 3 multiplications: z₀ = bd, z₂ = ac, and (a+b)(c+d). This is the key insight that reduces from 4 to 3 multiplications.",
+        "c": "Four multiplications is what traditional methods would use (ac, ad, bc, bd), but Karatsuba reduces this.",
+        "d": "Five multiplications would be more than necessary and defeat the purpose of the optimization."
+      },
+      "correctAnswer": "b",
+      "difficulty": "easy"
+    },
+    {
+      "question": "What is the recurrence relation for Karatsuba's time complexity?",
+      "answers": {
+        "a": "T(n) = 2T(n/2) + O(n)",
+        "b": "T(n) = 3T(n/2) + O(n)",
+        "c": "T(n) = 4T(n/2) + O(n)",
+        "d": "T(n) = 3T(n/2) + O(n²)"
+      },
+      "explanations": {
+        "a": "This would give O(n log n) complexity, but doesn't account for the 3 recursive calls Karatsuba makes.",
+        "b": "Correct! T(n) = 3T(n/2) + O(n) represents 3 recursive calls on problems of size n/2, plus O(n) work for additions and combining results.",
+        "c": "This represents traditional multiplication's 4 recursive calls, which Karatsuba specifically avoids.",
+        "d": "The combining step in Karatsuba is O(n), not O(n²), due to efficient addition and shifting operations."
+      },
+      "correctAnswer": "b",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For the multiplication 1234 × 5678 using Karatsuba with split position 2, what is the value of (a+b)(c+d)?",
+      "answers": {
+        "a": "46 × 134 = 6164",
+        "b": "134 × 46 = 6164", 
+        "c": "78 × 34 = 2652",
+        "d": "56 × 12 = 672"
+      },
+      "explanations": {
+        "a": "The order is incorrect. For x=1234, a=12, b=34, so a+b=46. For y=5678, c=56, d=78, so c+d=134.",
+        "b": "Correct! For x=1234: a=12, b=34, so a+b=46. For y=5678: c=56, d=78, so c+d=134. Therefore (a+b)(c+d) = 46×134 = 6164.",
+        "c": "This is the value of bd (78×34), not (a+b)(c+d).",
+        "d": "This is the value of ac (56×12), not (a+b)(c+d)."
+      },
+      "correctAnswer": "b",
+      "difficulty": "medium"
+    },
+    {
+      "question": "In the final combination step of Karatsuba's algorithm, what is the formula for computing the result?",
+      "answers": {
+        "a": "z₂ + z₁ + z₀",
+        "b": "z₂ × 10^m + z₁ + z₀",
+        "c": "z₂ × 10^(2m) + z₁ × 10^m + z₀",
+        "d": "z₂ × 10^(2m) + z₁ × 10^(2m) + z₀"
+      },
+      "explanations": {
+        "a": "Simple addition doesn't account for the positional values of the different terms.",
+        "b": "This doesn't properly weight the z₂ term, which should be shifted by 2m positions.",
+        "c": "Correct! The formula x×y = z₂×10^(2m) + z₁×10^m + z₀ properly combines the high-high product (shifted by 2m), cross terms (shifted by m), and low-low product.",
+        "d": "This incorrectly shifts z₁ by 2m instead of m, which would place it in the wrong position."
       },
       "correctAnswer": "c",
-      "difficulty": "beginner"
+      "difficulty": "medium"
     },
     {
-      "question": "How many of the three recursive calls are taking place at any one time?",
+      "question": "What is the primary reason Karatsuba's algorithm becomes more efficient as input size increases?",
       "answers": {
-        "a": "3",
-        "b": "1",
-        "c": "4",
-        "d": "2"
+        "a": "The constant factors become negligible",
+        "b": "The algorithm switches to faster hardware operations",
+        "c": "The recursive overhead decreases proportionally", 
+        "d": "The asymptotic advantage of O(n^1.585) over O(n²) becomes more significant"
       },
       "explanations": {
-        "a": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed.",
-        "b": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed.",
-        "c": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed.",
-        "d": "At most one of these three calls can be taking place at any one time: The second recursive call only begins after the first recursive call has been completed, and the third recursive call only begins after the second has completed."
+        "a": "While constant factors matter, the key advantage is the fundamental complexity difference.",
+        "b": "Karatsuba doesn't depend on special hardware; it's a software algorithm optimization.",
+        "c": "Recursive overhead actually increases with deeper recursion, not decreases.",
+        "d": "Correct! As n grows large, the difference between n^1.585 and n² becomes dramatic. For n=1000, n² = 10⁶ while n^1.585 ≈ 39,811."
       },
-      "correctAnswer": "b",
-      "difficulty": "beginner"
+      "correctAnswer": "d",
+      "difficulty": "hard"
     },
     {
-      "question": "What three recursive top-level multiplies are called for when one uses Karatsuba multiplication to multiply the binary numbers 10010111 and 11101001: (i) 1001·1110 (ii) 0111·1001 (iii) 10000·10111 (iv) 1011·1001 (v) 0101·1110 (vi) 10000·10001",
+      "question": "Consider implementing Karatsuba for very large numbers. What is the most critical optimization consideration?",
       "answers": {
-        "a": "(i), (ii), (vi)",
-        "b": "(i), (ii), (iii)",
-        "c": "(ii), (iii), (iv)",
-        "d": "(i), (iii), (v)"
+        "a": "Choosing the optimal threshold for switching to traditional multiplication",
+        "b": "Using the fastest possible addition algorithm",
+        "c": "Minimizing memory allocation in recursive calls",
+        "d": "Implementing parallel processing for the three recursive calls"
       },
       "explanations": {
-        "a": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111.",
-        "b": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111.",
-        "c": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111.",
-        "d": "These numbers can be decomposed as 10010101 = 1001X + 0111 and 11101001 = 1110X + 1001 where X = 2^4. The recursive calls are then 1001·1110, 0111·1001 and (1001+0111)(1110+1001) = 10000·10111."
+        "a": "Correct! The crossover point where Karatsuba becomes faster than traditional multiplication is crucial. Too low and you waste time on unnecessary recursion; too high and you miss optimization opportunities.",
+        "b": "While addition speed matters, it's not the most critical factor since addition is already much faster than multiplication.",
+        "c": "Memory optimization is important but secondary to choosing the right threshold for recursion.",
+        "d": "Parallelization can help but requires careful synchronization and may not always be available or beneficial."
+      },
+      "correctAnswer": "a",
+      "difficulty": "hard"
+    },
+    {
+      "question": "In a practical implementation of Karatsuba's algorithm, what happens if the input numbers have different lengths?",
+      "answers": {
+        "a": "The algorithm fails and cannot proceed",
+        "b": "The shorter number is padded with leading zeros",
+        "c": "The algorithm automatically switches to traditional multiplication",
+        "d": "The longer number is truncated to match the shorter one"
+      },
+      "explanations": {
+        "a": "Karatsuba can handle different length inputs with proper preprocessing.",
+        "b": "Correct! The standard approach is to pad the shorter number with leading zeros so both numbers have the same length. For example, multiplying 123 × 45 becomes 123 × 045.",
+        "c": "Different lengths alone don't require switching algorithms; padding resolves the issue.",
+        "d": "Truncating would give incorrect results and is never done in correct implementations."
       },
       "correctAnswer": "b",
-      "difficulty": "beginner"
+      "difficulty": "hard"
     }
   ]
 }

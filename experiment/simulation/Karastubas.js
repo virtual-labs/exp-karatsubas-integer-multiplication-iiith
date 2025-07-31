@@ -75,6 +75,102 @@ class KaratsubaMultiplication {
         }
     }
     
+    validateInputs() {
+        const inputX = document.getElementById('inputX');
+        const inputY = document.getElementById('inputY');
+        const validationMessage = document.getElementById('validationMessage');
+        
+        if (!inputX || !inputY || !validationMessage) return;
+        
+        const x = inputX.value.trim();
+        const y = inputY.value.trim();
+        
+        // Clear validation message if inputs are empty
+        if (!x && !y) {
+            validationMessage.classList.add('hidden');
+            return;
+        }
+        
+        const maxLength = Math.max(x.length, y.length);
+        
+        if (maxLength <= 4) {
+            // Good for learning
+            validationMessage.className = 'mb-4 p-3 rounded-lg bg-green-50 border border-green-200';
+            validationMessage.innerHTML = `
+                <div class="text-green-800">
+                    <span class="font-semibold">✅ Perfect for learning!</span> 
+                    Numbers with ${maxLength} digit${maxLength === 1 ? '' : 's'} will create a manageable number of steps.
+                </div>
+            `;
+        } else if (maxLength <= 6) {
+            // Moderate - still okay
+            validationMessage.className = 'mb-4 p-3 rounded-lg bg-yellow-50 border border-yellow-200';
+            validationMessage.innerHTML = `
+                <div class="text-yellow-800">
+                    <span class="font-semibold">⚠️ Moderate complexity:</span> 
+                    ${maxLength}-digit numbers will create more steps. Consider starting smaller if you're new to the algorithm.
+                </div>
+            `;
+        } else {
+            // Too large
+            validationMessage.className = 'mb-4 p-3 rounded-lg bg-red-50 border border-red-200';
+            validationMessage.innerHTML = `
+                <div class="text-red-800">
+                    <span class="font-semibold">🚫 Too large for effective learning:</span> 
+                    ${maxLength}-digit numbers create too many steps. Try 2-4 digit numbers first to understand the concepts.
+                </div>
+            `;
+        }
+    }
+    
+    validateInputs() {
+        const inputX = document.getElementById('inputX');
+        const inputY = document.getElementById('inputY');
+        const validationMessage = document.getElementById('validationMessage');
+        
+        if (!inputX || !inputY || !validationMessage) return;
+        
+        const x = inputX.value.trim();
+        const y = inputY.value.trim();
+        
+        // Clear validation message if inputs are empty
+        if (!x && !y) {
+            validationMessage.classList.add('hidden');
+            return;
+        }
+        
+        const maxLength = Math.max(x.length, y.length);
+        
+        if (maxLength <= 4) {
+            // Good for learning
+            validationMessage.className = 'mb-4 p-3 rounded-lg bg-green-50 border border-green-200';
+            validationMessage.innerHTML = `
+                <div class="text-green-800">
+                    <span class="font-semibold">✅ Perfect for learning!</span> 
+                    Numbers with ${maxLength} digit${maxLength === 1 ? '' : 's'} will create a manageable number of steps.
+                </div>
+            `;
+        } else if (maxLength <= 6) {
+            // Moderate - still okay
+            validationMessage.className = 'mb-4 p-3 rounded-lg bg-yellow-50 border border-yellow-200';
+            validationMessage.innerHTML = `
+                <div class="text-yellow-800">
+                    <span class="font-semibold">⚠️ Moderate complexity:</span> 
+                    ${maxLength}-digit numbers will create more steps. Consider starting smaller if you're new to the algorithm.
+                </div>
+            `;
+        } else {
+            // Too large
+            validationMessage.className = 'mb-4 p-3 rounded-lg bg-red-50 border border-red-200';
+            validationMessage.innerHTML = `
+                <div class="text-red-800">
+                    <span class="font-semibold">🚫 Too large for effective learning:</span> 
+                    ${maxLength}-digit numbers create too many steps. Try 2-4 digit numbers first to understand the concepts.
+                </div>
+            `;
+        }
+    }
+    
     startVisualization() {
         this.updateInputs();
         
@@ -84,7 +180,7 @@ class KaratsubaMultiplication {
         }
         
         if (this.x.length > 8 || this.y.length > 8) {
-            alert('Please use numbers with 8 digits or less for better visualization');
+            this.showLargeNumberWarning();
             return;
         }
         
@@ -117,7 +213,7 @@ class KaratsubaMultiplication {
         }
         
         if (this.x.length > 8 || this.y.length > 8) {
-            alert('Please use numbers with 8 digits or less for better visualization');
+            this.showLargeNumberWarning();
             return;
         }
         
@@ -326,8 +422,8 @@ class KaratsubaMultiplication {
                 ← Previous Step
             </button>
             <button onclick="stepForward()" class="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                    ${this.currentStep >= this.steps.length - 1 ? 'disabled' : ''}>
-                ${this.challengeActive ? 'Submit Answer' : 'Next Step →'}
+                    ${this.currentStep >= this.steps.length - 1 && !this.challengeActive ? 'disabled' : ''}>
+                ${this.challengeActive ? 'Submit Answer' : (this.currentStep >= this.steps.length - 1 ? 'Complete Algorithm' : 'Next Step →')}
             </button>
         </div>`;
         
@@ -361,7 +457,15 @@ class KaratsubaMultiplication {
             prevBtn.disabled = this.currentStep === 0;
         }
         if (stepBtn) {
-            stepBtn.disabled = this.currentStep >= this.steps.length - 1;
+            stepBtn.disabled = (this.currentStep >= this.steps.length - 1) && !this.challengeActive;
+            // Update button text
+            if (this.challengeActive) {
+                stepBtn.textContent = 'Submit Answer';
+            } else if (this.currentStep >= this.steps.length - 1) {
+                stepBtn.textContent = 'Complete Algorithm';
+            } else {
+                stepBtn.textContent = 'Next Step →';
+            }
         }
     }
     
@@ -369,7 +473,13 @@ class KaratsubaMultiplication {
         // Find the forward navigation button and update its text
         const forwardButtons = document.querySelectorAll('button[onclick="stepForward()"]');
         forwardButtons.forEach(button => {
-            button.textContent = this.challengeActive ? 'Submit Answer' : 'Next Step →';
+            if (this.challengeActive) {
+                button.textContent = 'Submit Answer';
+            } else if (this.currentStep >= this.steps.length - 1) {
+                button.textContent = 'Complete Algorithm';
+            } else {
+                button.textContent = 'Next Step →';
+            }
         });
     }
     
@@ -742,10 +852,11 @@ class KaratsubaMultiplication {
                 <div class="bg-green-100 text-green-800 p-3 rounded">
                     <div class="font-semibold">✓ Correct!</div>
                     <div class="text-sm">${this.currentChallenge.explanation}</div>
-                    <div class="text-sm mt-2 text-green-600">Click \"Next Step\" below to continue.</div>
+                    <div class="text-sm mt-2 text-green-600">Click the button below to continue.</div>
                 </div>
             `;
             this.challengeActive = false;
+            this.updateNavigationButtonText();
         } else {
             feedback.innerHTML = `
                 <div class="bg-red-100 text-red-800 p-3 rounded">
@@ -761,7 +872,6 @@ class KaratsubaMultiplication {
                 </div>
             `;
         }
-        this.updateNavigationButtonText();
     }
     
     skipChallenge() {
@@ -772,13 +882,11 @@ class KaratsubaMultiplication {
                     <div class="font-semibold">Challenge Skipped</div>
                     <div class="text-sm">Correct answer: ${this.currentChallenge.correctAnswer}</div>
                     <div class="text-sm mt-1">${this.currentChallenge.explanation}</div>
-                    <div class="text-sm mt-2 text-blue-600">Click "Next Step" below to continue.</div>
+                    <div class="text-sm mt-2 text-blue-600">Click the button below to continue.</div>
                 </div>
             `;
         }
         this.challengeActive = false;
-        
-        // Update the display to refresh the navigation button text
         this.updateNavigationButtonText();
     }
     
@@ -812,6 +920,12 @@ class KaratsubaMultiplication {
             }
         }
         
+        // Check if we're at the end
+        if (this.currentStep >= this.steps.length - 1) {
+            this.completeVisualization();
+            return;
+        }
+        
         this.currentStep++;
         this.displayCurrentStep();
         this.updateDisplay();
@@ -835,28 +949,45 @@ class KaratsubaMultiplication {
         
         document.getElementById('visualizationArea').innerHTML = `
             <div class="text-center py-8">
-                <div class="text-2xl font-bold text-green-700 mb-4">Algorithm Complete!</div>
+                <div class="text-3xl font-bold text-green-700 mb-2">🎉 The End 🎉</div>
+                <div class="text-xl font-semibold text-green-600 mb-4">Karatsuba Algorithm Complete!</div>
                 <div class="text-lg text-gray-600 mb-4">
-                    Final result: ${this.x} × ${this.y} = ${finalResult}
+                    Final result: <span class="font-mono font-bold">${this.x} × ${this.y} = ${finalResult}</span>
                 </div>
-                <div class="bg-green-50 p-4 rounded-lg">
+                <div class="bg-green-50 p-4 rounded-lg mb-4">
                     <div class="text-sm text-green-800">
-                        Karatsuba's algorithm used ${this.countMultiplications()} recursive multiplications
-                        instead of ${Math.pow(Math.max(this.x.length, this.y.length), 2)} for classical method.
+                        <div class="mb-2"><strong>Algorithm Efficiency:</strong></div>
+                        <div>• Karatsuba used ${this.countMultiplications()} recursive multiplications</div>
+                        <div>• Classical method would need ${Math.pow(Math.max(this.x.length, this.y.length), 2)} single-digit multiplications</div>
+                        <div class="mt-2 font-semibold">Congratulations! You've successfully traced through the Karatsuba multiplication algorithm.</div>
                     </div>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4 space-x-2">
                     <button onclick="stepBackward()" class="btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                        ← Go to Previous Step
+                        ← Review Previous Step
+                    </button>
+                    <button onclick="generateNewExample()" class="btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+                        Try Another Example
                     </button>
                 </div>
             </div>
         `;
         
-        // Reset UI buttons
-        document.getElementById('startBtn').disabled = false;
-        document.getElementById('stepBtn').disabled = true;
-        document.getElementById('prevBtn').disabled = false;
+        // Reset UI buttons  
+        const stepBtn = document.getElementById('stepBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        if (stepBtn) {
+            stepBtn.disabled = true;
+            stepBtn.textContent = 'Next Step →';
+        }
+        if (prevBtn) {
+            prevBtn.disabled = false;
+        }
+        if (resetBtn) {
+            resetBtn.disabled = false;
+        }
     }
     
     countMultiplications() {
@@ -871,13 +1002,25 @@ class KaratsubaMultiplication {
         
         document.getElementById('visualizationArea').innerHTML = `
             <div class="text-center text-gray-500 py-8">
-                Enter two numbers and click "Start Algorithm" to begin visualization
+                Enter two numbers and click "Next Step" to begin visualization
             </div>
         `;
         
-        document.getElementById('startBtn').disabled = false;
-        document.getElementById('stepBtn').disabled = true;
-        document.getElementById('prevBtn').disabled = true;
+        // Reset button states
+        const stepBtn = document.getElementById('stepBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        if (stepBtn) {
+            stepBtn.disabled = false;
+            stepBtn.textContent = 'Next Step →';
+        }
+        if (prevBtn) {
+            prevBtn.disabled = true;
+        }
+        if (resetBtn) {
+            resetBtn.disabled = false;
+        }
         
         this.updateDisplay();
     }
@@ -888,6 +1031,9 @@ class KaratsubaMultiplication {
     }
     
     generateNewExample() {
+        // First reset the visualization to clear any existing state
+        this.resetVisualization();
+        
         const examples = [
             ['12', '34'],
             ['123', '456'],
@@ -899,9 +1045,21 @@ class KaratsubaMultiplication {
         document.getElementById('inputX').value = example[0];
         document.getElementById('inputY').value = example[1];
         this.updateInputs();
+        
+        // Clear any validation messages
+        const validationMessage = document.getElementById('validationMessage');
+        if (validationMessage) {
+            validationMessage.classList.add('hidden');
+        }
+        
+        // Trigger validation for the new inputs
+        this.validateInputs();
     }
     
     loadExample(type) {
+        // First reset the visualization to clear any existing state
+        this.resetVisualization();
+        
         const examples = {
             'simple': ['12', '34'],
             'medium': ['1234', '4321'],
@@ -912,6 +1070,15 @@ class KaratsubaMultiplication {
             document.getElementById('inputX').value = examples[type][0];
             document.getElementById('inputY').value = examples[type][1];
             this.updateInputs();
+            
+            // Clear any validation messages
+            const validationMessage = document.getElementById('validationMessage');
+            if (validationMessage) {
+                validationMessage.classList.add('hidden');
+            }
+            
+            // Trigger validation for the new inputs
+            this.validateInputs();
         }
     }
     
@@ -921,12 +1088,98 @@ class KaratsubaMultiplication {
         document.getElementById('speedValue').textContent = this.animationSpeed;
     }
     
+    showLargeNumberWarning() {
+        const visualArea = document.getElementById('visualizationArea');
+        const maxDigits = Math.max(this.x.length, this.y.length);
+        const estimatedSteps = Math.pow(maxDigits, 1.585) * 8; // Rough estimate
+        
+        visualArea.innerHTML = `
+            <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
+                <div class="text-center">
+                    <div class="text-4xl mb-3">⚠️</div>
+                    <div class="text-2xl font-bold text-yellow-800 mb-4">Large Numbers Detected!</div>
+                    <div class="text-lg text-yellow-700 mb-4">
+                        Your numbers have <strong>${maxDigits} digits</strong>, which will create approximately <strong>${Math.ceil(estimatedSteps)} steps</strong>.
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-yellow-300 mb-4">
+                        <div class="text-yellow-800 space-y-2">
+                            <div><strong>🎯 Learning Recommendation:</strong></div>
+                            <div>• Start with <strong>2-4 digit numbers</strong> to understand the concepts first</div>
+                            <div>• Large numbers create too many steps for effective learning</div>
+                            <div>• You can gradually increase number size once you master the basics</div>
+                        </div>
+                    </div>
+                    <div class="space-x-3">
+                        <button onclick="loadExample('simple')" class="btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+                            Try Simple Example (12 × 34)
+                        </button>
+                        <button onclick="loadExample('medium')" class="btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                            Try Medium Example (1234 × 4321)
+                        </button>
+                        <button onclick="karatsubaApp.proceedWithLargeNumbers()" class="btn bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">
+                            Proceed Anyway
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    proceedWithLargeNumbers() {
+        // Override the length check temporarily
+        const originalX = this.x;
+        const originalY = this.y;
+        
+        // Force start the visualization
+        this.steps = [];
+        this.currentStep = 0;
+        this.isRunning = true;
+        this.challengeActive = false;
+        
+        // Generate all steps
+        try {
+            this.generateSteps(originalX, originalY, 0);
+            
+            // Update UI
+            const startBtn = document.getElementById('startBtn');
+            const stepBtn = document.getElementById('stepBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            
+            if (startBtn) startBtn.disabled = true;
+            if (stepBtn) stepBtn.disabled = false;
+            if (prevBtn) prevBtn.disabled = true;
+            
+            this.displayCurrentStep();
+            this.updateDisplay();
+        } catch (error) {
+            document.getElementById('visualizationArea').innerHTML = `
+                <div class="bg-red-50 border border-red-300 rounded-lg p-4 text-center">
+                    <div class="text-red-700">
+                        <div class="text-xl font-bold mb-2">⚠️ Numbers Too Large</div>
+                        <div>These numbers are too large for the visualization to handle efficiently.</div>
+                        <div class="mt-3">
+                            <button onclick="clearAll()" class="btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                                Try Smaller Numbers
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
     clearAll() {
         this.resetVisualization();
         document.getElementById('inputX').value = '';
         document.getElementById('inputY').value = '';
         this.x = '';
         this.y = '';
+        
+        // Clear validation messages
+        const validationMessage = document.getElementById('validationMessage');
+        if (validationMessage) {
+            validationMessage.classList.add('hidden');
+        }
     }
     
     getFormatHint(challenge) {
@@ -964,6 +1217,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Global functions for HTML onclick handlers
 function updateInputs() {
     if (karatsubaApp) karatsubaApp.updateInputs();
+}
+
+function validateInputs() {
+    if (karatsubaApp) karatsubaApp.validateInputs();
 }
 
 function startVisualization() {
@@ -1020,4 +1277,8 @@ function tryAgain() {
 
 function acceptAndContinue() {
     if (karatsubaApp) karatsubaApp.acceptAndContinue();
+}
+
+function proceedWithLargeNumbers() {
+    if (karatsubaApp) karatsubaApp.proceedWithLargeNumbers();
 }
