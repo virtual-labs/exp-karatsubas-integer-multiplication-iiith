@@ -53,7 +53,7 @@
       "difficulty": "easy"
     },
     {
-      "question": "What is the key insight that makes Karatsuba's algorithm more efficient than traditional multiplication?",
+      "question": "What is the key insight that makes Karatsuba's algorithm more efficient than traditional multiplication? (Let z₀ = ac, z₁ = bd, and z₂ = (a+b)(c+d) - z₀ - z₁)",
       "answers": {
         "a": "It uses fewer addition operations",
         "b": "It reduces 4 multiplications to 3 multiplications",
@@ -62,7 +62,7 @@
       },
       "explanations": {
         "a": "While Karatsuba does involve additions, the key efficiency gain comes from reducing multiplications, not additions.",
-        "b": "Correct! The brilliant insight is computing z₁ = (a+b)(c+d) - z₂ - z₀ instead of computing ad and bc separately, reducing 4 multiplications (ac, ad, bc, bd) to just 3 (ac, bd, (a+b)(c+d)).",
+        "b": "Correct! The brilliant insight is computing z₂ = (a+b)(c+d) - z₀ - z₁ instead of computing ad and bc separately, reducing 4 multiplications (ac, ad, bc, bd) to just 3.",
         "c": "Karatsuba doesn't inherently involve parallel processing - it's a sequential divide-and-conquer algorithm.",
         "d": "Lookup tables aren't part of Karatsuba's core algorithm, though they might be used for base cases."
       },
@@ -138,7 +138,7 @@
       "difficulty": "hard"
     },
     {
-      "question": "Consider multiplying x = 5678 and y = 1234 using Karatsuba's algorithm. If we split at position 2, what are the values of the three key multiplications z₀, z₁, and z₂?",
+      "question": "Consider multiplying x = 5678 and y = 1234 using Karatsuba's algorithm. If we split at position 2, what are the values of the three key multiplications z₀, z₁, and z₂? (Define: z₀ = bd, z₁ = (a+b)(c+d) - z₂ - z₀, z₂ = ac, where a=56, b=78, c=12, d=34)",
       "answers": {
         "a": "z₀ = 78×34, z₁ = 56×12, z₂ = (56+78)×(12+34)",
         "b": "z₀ = 78×34, z₁ = (56+78)×(12+34) - 56×12 - 78×34, z₂ = 56×12",
