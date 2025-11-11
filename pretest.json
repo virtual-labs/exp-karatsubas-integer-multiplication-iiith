@@ -1,0 +1,158 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What is the time complexity of traditional long multiplication for multiplying two n-digit numbers?",
+      "answers": {
+        "a": "O(n)",
+        "b": "O(n²)",
+        "c": "O(n log n)",
+        "d": "O(n^1.585)"
+      },
+      "explanations": {
+        "a": "Linear time O(n) would be too fast for multiplication, as you need to process each digit of one number against all digits of the other.",
+        "b": "Correct! Traditional multiplication requires multiplying each digit of the first number (n digits) by each digit of the second number (n digits), resulting in n² single-digit multiplications.",
+        "c": "O(n log n) is better than O(n²) but not achievable with traditional multiplication methods.",
+        "d": "O(n^1.585) is actually the complexity of Karatsuba's algorithm, not traditional multiplication."
+      },
+      "correctAnswer": "b",
+      "difficulty": "easy"
+    },
+    {
+      "question": "What fundamental technique does Karatsuba's algorithm use to achieve faster multiplication?",
+      "answers": {
+        "a": "Dynamic Programming",
+        "b": "Greedy Method",
+        "c": "Divide and Conquer",
+        "d": "Branch and Bound"
+      },
+      "explanations": {
+        "a": "Dynamic Programming involves storing solutions to subproblems, but Karatsuba doesn't reuse subproblem solutions in this way.",
+        "b": "Greedy methods make locally optimal choices, which doesn't apply to Karatsuba's approach.",
+        "c": "Correct! Karatsuba uses divide and conquer by splitting large numbers into smaller parts, solving subproblems recursively, and combining results.",
+        "d": "Branch and Bound is used for optimization problems, not arithmetic algorithms like multiplication."
+      },
+      "correctAnswer": "c",
+      "difficulty": "easy"
+    },
+    {
+      "question": "In Karatsuba's algorithm, how many parts is each input number split into?",
+      "answers": {
+        "a": "3 parts",
+        "b": "4 parts", 
+        "c": "2 parts",
+        "d": "It varies based on the number size"
+      },
+      "explanations": {
+        "a": "Three parts would make the algorithm more complex and wouldn't provide the efficiency gains Karatsuba achieves.",
+        "b": "Four parts would be the traditional approach that Karatsuba specifically improves upon.",
+        "c": "Correct! Each number is split into exactly 2 parts: a high part and a low part. For example, 1234 becomes 12 (high) and 34 (low).",
+        "d": "The number of parts is always 2, regardless of the input size - this consistency is key to the algorithm's design."
+      },
+      "correctAnswer": "c",
+      "difficulty": "easy"
+    },
+    {
+      "question": "What is the key insight that makes Karatsuba's algorithm more efficient than traditional multiplication? (Let z₀ = ac, z₁ = bd, and z₂ = (a+b)(c+d) - z₀ - z₁)",
+      "answers": {
+        "a": "It uses fewer addition operations",
+        "b": "It reduces 4 multiplications to 3 multiplications",
+        "c": "It processes digits in parallel",
+        "d": "It uses lookup tables for small multiplications"
+      },
+      "explanations": {
+        "a": "While Karatsuba does involve additions, the key efficiency gain comes from reducing multiplications, not additions.",
+        "b": "Correct! The brilliant insight is computing z₂ = (a+b)(c+d) - z₀ - z₁ instead of computing ad and bc separately, reducing 4 multiplications (ac, ad, bc, bd) to just 3.",
+        "c": "Karatsuba doesn't inherently involve parallel processing - it's a sequential divide-and-conquer algorithm.",
+        "d": "Lookup tables aren't part of Karatsuba's core algorithm, though they might be used for base cases."
+      },
+      "correctAnswer": "b",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For multiplying two 8-digit numbers, approximately how many levels of recursion will Karatsuba's algorithm have?",
+      "answers": {
+        "a": "2 levels",
+        "b": "3 levels", 
+        "c": "4 levels",
+        "d": "8 levels"
+      },
+      "explanations": {
+        "a": "Two levels would only handle up to 4-digit numbers effectively (2² = 4).",
+        "b": "Correct! Each level halves the problem size: 8 → 4 → 2 → 1, which is 3 levels of recursion (log₂(8) = 3).",
+        "c": "Four levels would be needed for 16-digit numbers (2⁴ = 16).",
+        "d": "Eight levels would be excessive and would handle numbers with 2⁸ = 256 digits."
+      },
+      "correctAnswer": "b",
+      "difficulty": "medium"
+    },
+    {
+      "question": "In the Karatsuba algorithm, if we split x = a·10^m + b and y = c·10^m + d, what does the formula z₁ = (a+b)(c+d) - z₂ - z₀ actually compute?",
+      "answers": {
+        "a": "The sum ac + bd",
+        "b": "The difference ac - bd", 
+        "c": "The sum ad + bc",
+        "d": "The product (a+b)(c+d)"
+      },
+      "explanations": {
+        "a": "ac + bd would be z₂ + z₀, not what the given formula computes.",
+        "b": "ac - bd doesn't correspond to any meaningful part of the multiplication result.",
+        "c": "Correct! When we expand (a+b)(c+d) = ac + ad + bc + bd, and subtract z₂ = ac and z₀ = bd, we get ad + bc, which is exactly the 'middle term' needed for the final result.",
+        "d": "(a+b)(c+d) is what we compute first, but after subtracting z₂ and z₀, we get the cross terms ad + bc."
+      },
+      "correctAnswer": "c",
+      "difficulty": "medium"
+    },
+    {
+      "question": "What is the exact time complexity of Karatsuba's multiplication algorithm?",
+      "answers": {
+        "a": "O(n^log₂3) ≈ O(n^1.585)",
+        "b": "O(n^1.5)",
+        "c": "O(n² log n)", 
+        "d": "O(n log² n)"
+      },
+      "explanations": {
+        "a": "Correct! The recurrence relation T(n) = 3T(n/2) + O(n) gives us T(n) = O(n^log₂3) ≈ O(n^1.585) by the Master Theorem.",
+        "b": "O(n^1.5) would be better than Karatsuba's actual complexity and isn't achievable with this approach.",
+        "c": "O(n² log n) is worse than Karatsuba's complexity and would make the algorithm less efficient than traditional multiplication.",
+        "d": "O(n log² n) is much better than what Karatsuba achieves and represents the complexity of some FFT-based algorithms."
+      },
+      "correctAnswer": "a",
+      "difficulty": "hard"
+    },
+    {
+      "question": "When implementing Karatsuba's algorithm, what is the most important consideration for the base case?",
+      "answers": {
+        "a": "Stop recursion when numbers become negative",
+        "b": "Stop recursion when numbers have different lengths",
+        "c": "Stop recursion when numbers are small enough that traditional multiplication is faster",
+        "d": "Always recurse until numbers are single digits"
+      },
+      "explanations": {
+        "a": "Karatsuba works with any positive integers; negativity isn't the determining factor for the base case.",
+        "b": "Numbers can be padded with zeros to make them the same length; this doesn't determine the base case.",
+        "c": "Correct! There's a crossover point (typically around 10-100 digits depending on implementation) where the overhead of recursion makes traditional O(n²) multiplication faster for small inputs.",
+        "d": "Always recursing to single digits would be inefficient; there's an optimal threshold where you should switch to traditional multiplication."
+      },
+      "correctAnswer": "c",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Consider multiplying x = 5678 and y = 1234 using Karatsuba's algorithm. If we split at position 2, what are the values of the three key multiplications z₀, z₁, and z₂? (Define: z₀ = bd, z₁ = (a+b)(c+d) - z₂ - z₀, z₂ = ac, where a=56, b=78, c=12, d=34)",
+      "answers": {
+        "a": "z₀ = 78×34, z₁ = 56×12, z₂ = (56+78)×(12+34)",
+        "b": "z₀ = 78×34, z₁ = (56+78)×(12+34) - 56×12 - 78×34, z₂ = 56×12",
+        "c": "z₀ = 56×12, z₁ = 78×34, z₂ = (56+78)×(12+34)",
+        "d": "z₀ = 78×34, z₁ = 56×78, z₂ = 12×34"
+      },
+      "explanations": {
+        "a": "This shows the three multiplications but mislabels them. z₁ should be the computed cross-term, not just one of the multiplications.",
+        "b": "Correct! z₀ = bd = 78×34 = 2652, z₂ = ac = 56×12 = 672, and z₁ = (a+b)(c+d) - z₂ - z₀ = 134×46 - 672 - 2652 = 6164 - 3324 = 2840.",
+        "c": "This reverses z₀ and z₂, and doesn't properly compute z₁ as the cross-term formula.",
+        "d": "This shows incorrect pairings that don't follow the Karatsuba decomposition pattern."
+      },
+      "correctAnswer": "b",
+      "difficulty": "hard"
+    }
+  ]
+}

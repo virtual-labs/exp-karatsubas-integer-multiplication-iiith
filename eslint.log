@@ -1,0 +1,32 @@
+
+/home/runner/work/exp-karatsubas-integer-multiplication-iiith/exp-karatsubas-integer-multiplication-iiith/experiment/simulation/Karastubas.js
+   126:5    warning  Duplicate name 'validateInputs'                      no-dupe-class-members
+   868:41   warning  Unnecessary escape character: \"                     no-useless-escape
+   868:53   warning  Unnecessary escape character: \"                     no-useless-escape
+   868:62   warning  Unnecessary escape character: \"                     no-useless-escape
+   868:138  warning  Unnecessary escape character: \"                     no-useless-escape
+  1218:10   warning  'updateInputs' is defined but never used             no-unused-vars
+  1222:10   warning  'validateInputs' is defined but never used           no-unused-vars
+  1226:10   warning  'startVisualization' is defined but never used       no-unused-vars
+  1230:10   warning  'startStepByStep' is defined but never used          no-unused-vars
+  1234:10   warning  'stepForward' is defined but never used              no-unused-vars
+  1238:10   warning  'stepBackward' is defined but never used             no-unused-vars
+  1242:10   warning  'resetVisualization' is defined but never used       no-unused-vars
+  1246:10   warning  'generateNewExample' is defined but never used       no-unused-vars
+  1250:10   warning  'loadExample' is defined but never used              no-unused-vars
+  1254:10   warning  'updateSpeed' is defined but never used              no-unused-vars
+  1258:10   warning  'clearAll' is defined but never used                 no-unused-vars
+  1262:10   warning  'submitChallenge' is defined but never used          no-unused-vars
+  1266:10   warning  'skipChallenge' is defined but never used            no-unused-vars
+  1270:10   warning  'showHint' is defined but never used                 no-unused-vars
+  1274:10   warning  'tryAgain' is defined but never used                 no-unused-vars
+  1278:10   warning  'acceptAndContinue' is defined but never used        no-unused-vars
+  1282:10   warning  'proceedWithLargeNumbers' is defined but never used  no-unused-vars
+
+/home/runner/work/exp-karatsubas-integer-multiplication-iiith/exp-karatsubas-integer-multiplication-iiith/experiment/simulation/mobile-detection.js
+  393:7   warning  'mobileDetection' is assigned a value but never used  no-unused-vars
+  396:38  warning  'module' is not defined                               no-undef
+  397:3   warning  'module' is not defined                               no-undef
+
+✖ 25 problems (0 errors, 25 warnings)
+
