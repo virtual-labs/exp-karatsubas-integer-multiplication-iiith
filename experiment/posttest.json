@@ -78,12 +78,12 @@
         "d": "56 × 12 = 672"
       },
       "explanations": {
-        "a": "The order is incorrect. For x=1234, a=12, b=34, so a+b=46. For y=5678, c=56, d=78, so c+d=134.",
-        "b": "Correct! For x=1234: a=12, b=34, so a+b=46. For y=5678: c=56, d=78, so c+d=134. Therefore (a+b)(c+d) = 46×134 = 6164.",
+        "a": "Correct! For x=1234: a=12, b=34, so a+b=46. For y=5678: c=56, d=78, so c+d=134. Therefore (a+b)(c+d) = 46×134 = 6164.",
+        "b": "While this gives the same numerical result (6164), the correct expression should be (a+b)(c+d) = 46×134, not 134×46, to match the order of the formula.",
         "c": "This is the value of bd (78×34), not (a+b)(c+d).",
         "d": "This is the value of ac (56×12), not (a+b)(c+d)."
       },
-      "correctAnswer": "b",
+      "correctAnswer": "a",
       "difficulty": "medium"
     },
     {
