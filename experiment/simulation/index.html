@@ -1,13 +1,245 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Karatsuba's Integer Multiplication - Discrete Mathematics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="mobile-detection.js"></script>
 </head>
-<body>
-		<!-- Your code goes here-->
+<body class="bg-gray-50 text-gray-800">
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+  <div class="max-w-6xl mx-auto px-6 pb-16 space-y-8">
+
+    <!-- Main Visualization Section -->
+    <section class="bg-white p-6 rounded-xl shadow-lg">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-indigo-700">Algorithm Visualization</h2>
+      </div>
+
+      <!-- Input Section -->
+      <div class="bg-blue-50 p-4 rounded-lg mb-6">
+        <h3 class="font-semibold text-blue-800 mb-3">Input Numbers</h3>
+        <div class="grid md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">First Number (x)</label>
+            <input type="text" id="inputX" class="w-full px-3 py-2 border border-gray-300 rounded-md font-mono text-lg" 
+                   placeholder="e.g., 1234" onchange="updateInputs()" oninput="validateInputs()">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Second Number (y)</label>
+            <input type="text" id="inputY" class="w-full px-3 py-2 border border-gray-300 rounded-md font-mono text-lg" 
+                   placeholder="e.g., 5678" onchange="updateInputs()" oninput="validateInputs()">
+          </div>
+        </div>
+        
+        <!-- Validation Message Area -->
+        <div id="validationMessage" class="hidden mb-4 p-3 rounded-lg">
+          <!-- Validation messages will appear here -->
+        </div>
+        <div class="flex gap-2 flex-wrap">
+           <button onclick="stepBackward()" id="prevBtn" class="btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded" disabled>
+            ← Previous
+          </button>
+          <button onclick="startStepByStep()" id="stepBtn" class="btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+            Next Step →
+          </button>
+         
+          <button onclick="resetVisualization()" id="resetBtn" class="btn bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Visualization Area -->
+      <div id="visualizationArea" class="bg-gray-50 p-6 rounded-lg">
+        <div class="text-center text-gray-500 py-8">
+          Enter two numbers and click "Next Step" to begin visualization
+        </div>
+      </div>
+
+      <!-- Step Counter and Complexity -->
+      <div class="mt-4 grid md:grid-cols-2 gap-4">
+        <div class="bg-indigo-50 p-4 rounded-lg text-center">
+          <div class="text-2xl font-bold text-indigo-700" id="stepCount">0</div>
+          <div class="text-sm text-indigo-600">Current Step</div>
+        </div>
+        <div class="bg-green-50 p-4 rounded-lg text-center">
+          <div class="text-2xl font-bold text-green-700" id="totalOps">0</div>
+          <div class="text-sm text-green-600">Total Operations</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Controls Button -->
+    <div class="floating-button primary" id="controlsButton">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      </svg>
+    </div>
+    
+    <!-- Floating Controls Panel -->
+    <div class="floating-panel" id="controlsPanel">
+      <div class="floating-panel-header">
+        <h3 class="panel-title">Algorithm Settings</h3>
+        <div class="floating-panel-close" id="controlsPanelClose">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </div>
+      </div>
+      <div class="floating-panel-content space-y-4">
+        <div class="bg-green-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-sm text-green-800 mb-3">Quick Actions</h4>
+          <div class="space-y-2">
+            <button onclick="generateNewExample()" class="w-full btn bg-indigo-600 hover:bg-indigo-700 text-white py-1.5 px-3 rounded text-xs">
+              New Example
+            </button>
+            <!-- <button onclick="resetVisualization()" class="w-full btn bg-gray-600 hover:bg-gray-700 text-white py-1.5 px-3 rounded text-xs">
+              Reset
+            </button> -->
+          </div>
+        </div>
+        <div class="bg-indigo-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-sm text-indigo-800 mb-3">Visualization Speed</h4>
+          <div class="space-y-2">
+            <label class="block text-xs font-medium text-gray-700">
+              Animation Speed: <span id="speedValue">1000</span>ms
+            </label>
+            <input type="range" id="speedSlider" min="200" max="2000" value="1000" step="100" 
+                   class="w-full accent-indigo-600" onchange="updateSpeed()">
+          </div>
+        </div>
+        <div class="bg-blue-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-sm text-blue-800 mb-3">Quick Examples</h4>
+          <div class="space-y-2">
+            <button onclick="loadExample('simple')" class="w-full btn bg-green-600 hover:bg-green-700 text-white py-1.5 px-3 rounded text-xs">
+              Simple (12 × 34)
+            </button>
+            <button onclick="loadExample('medium')" class="w-full btn bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded text-xs">
+              Medium (1234 × 4321)
+            </button>
+            <button onclick="loadExample('large')" class="w-full btn bg-purple-600 hover:bg-purple-700 text-white py-1.5 px-3 rounded text-xs">
+              Large (12345678 × 87654321)
+            </button>
+          </div>
+        </div>
+        <div class="bg-orange-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-sm text-orange-800 mb-3">Reset Options</h4>
+          <div class="space-y-2">
+            <!-- <button onclick="resetStats()" class="w-full btn bg-orange-600 hover:bg-orange-700 text-white py-1.5 px-3 rounded text-xs">
+              Reset Statistics
+            </button> -->
+            <button onclick="clearAll()" class="w-full btn bg-red-600 hover:bg-red-700 text-white py-1.5 px-3 rounded text-xs">
+              Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Info Button -->
+    <div class="floating-button secondary" id="infoButton">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+      </svg>
+    </div>
+    
+    <!-- Floating Info Panel -->
+    <div class="floating-panel" id="infoPanel">
+      <div class="floating-panel-header">
+        <h3 class="panel-title">Algorithm Guide</h3>
+        <div class="floating-panel-close" id="infoPanelClose">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </div>
+      </div>
+      <div class="floating-panel-content space-y-4">
+        <div class="bg-blue-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-sm text-blue-800 mb-2">Karatsuba's Method</h4>
+          <div class="text-xs space-y-1 text-gray-600">
+            <p>For numbers x and y with n digits:</p>
+            <p>• Split: x = a·10^m + b, y = c·10^m + d</p>
+            <p>• Compute: z₀ = b·d, z₂ = a·c</p>
+            <p>• Key insight: z₁ = (a+b)(c+d) - z₂ - z₀</p>
+            <p>• Result: x·y = z₂·10^(2m) + z₁·10^m + z₀</p>
+          </div>
+        </div>
+        <div class="bg-green-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-sm text-green-800 mb-2">Complexity</h4>
+          <div class="text-xs space-y-1 text-gray-600">
+            <p>• Classical: O(n²) - n² digit multiplications</p>
+            <p>• Karatsuba: O(n^1.585) - only 3 recursive calls</p>
+            <p>• Improvement comes from reducing 4 multiplications to 3</p>
+          </div>
+        </div>
+        <div class="bg-orange-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-sm text-orange-800 mb-2">How to Use</h4>
+          <div class="text-xs space-y-1 text-gray-600">
+            <p>• Enter two numbers to multiply</p>
+            <p>• Click "Next Step" to begin</p>
+            <p>• Step through the algorithm visualization</p>
+            <p>• Complete challenges to test understanding as you progress through the algorithm</p>
+            <p>• Compare with classical multiplication</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theory Section -->
+    <section class="grid md:grid-cols-2 gap-8">
+      <div class="card bg-white p-6 rounded-xl shadow">
+        <h2 class="text-2xl font-semibold text-indigo-700 mb-3">Algorithm Overview</h2>
+        <div class="space-y-4 text-sm">
+          <div class="bg-gray-100 p-4 rounded">
+            <h3 class="font-semibold text-gray-800 mb-2">Classical Multiplication</h3>
+            <p class="text-gray-700 mb-2">Standard grade-school method requires n² single-digit multiplications for n-digit numbers.</p>
+            <div class="font-mono text-xs bg-white p-2 rounded">
+              Time Complexity: O(n²)
+            </div>
+          </div>
+          
+          <div class="bg-indigo-100 p-4 rounded">
+            <h3 class="font-semibold text-indigo-800 mb-2">Karatsuba's Innovation</h3>
+            <p class="text-gray-700 mb-2">Reduces the number of recursive multiplications from 4 to 3 using clever algebraic manipulation.</p>
+            <div class="font-mono text-xs bg-white p-2 rounded">
+              Time Complexity: O(n^log₂3) ≈ O(n^1.585)
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card bg-white p-6 rounded-xl shadow">
+        <h2 class="text-2xl font-semibold text-indigo-700 mb-3">Key Formula</h2>
+        <div class="space-y-4 text-sm">
+          <div class="bg-yellow-100 p-4 rounded">
+            <h3 class="font-semibold text-yellow-800 mb-2">The Magic Formula</h3>
+            <div class="space-y-2">
+              <p class="text-gray-700">Instead of computing ac, ad, bc, bd separately:</p>
+              <div class="bg-white p-3 rounded font-mono text-xs">
+                <div>z₀ = bd</div>
+                <div>z₂ = ac</div>
+                <div class="font-bold text-indigo-600">z₁ = (a+b)(c+d) - z₂ - z₀</div>
+              </div>
+              <p class="text-gray-700">This gives us z₁ = ad + bc with only 3 multiplications!</p>
+            </div>
+          </div>
+          
+          <div class="bg-green-100 p-4 rounded">
+            <h3 class="font-semibold text-green-800 mb-2">Final Result</h3>
+            <div class="bg-white p-3 rounded font-mono text-xs text-center">
+              x × y = z₂ × 10^(2m) + z₁ × 10^m + z₀
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="Karastubas.js"></script>
 </body>
 </html>
